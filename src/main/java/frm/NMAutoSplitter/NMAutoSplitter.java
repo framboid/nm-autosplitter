@@ -99,31 +99,12 @@ public class NMAutoSplitter extends Plugin {
 		dirty = true;
 		phase = -1;
 	}
-
 	@Subscribe
 	public void onNpcChanged(NpcChanged e) {
 		if (e.getNpc() != nm) return;
 
 		onNightmareChanged(e.getOld().getId());
 		send_split();
-	}
-
-	@Subscribe
-	public void onNpcDespawned(NpcDespawned e) throws Exception {
-		if (e.getNpc() != nm) return;
-
-		send_split();
-	}
-	@Subscribe
-	public void onChatMessage(ChatMessage e) {
-		if (e.getMessage().contains("All four totems are fully charged.")) {
-			// start sleepwalker phase
-			int tick_count = client.getTickCount() + 4;
-			send_split();
-			subph_timer = tick_count;
-			phase_splits[phase] = tick_count - phase_timer;
-			if (get_noa_npc_type(nm) == 0 && phase == 3) phase_splits[0] = tick_count - fight_timer;
-		}
 	}
 
 	private void onNightmareChanged(int oldid) {
@@ -144,7 +125,6 @@ public class NMAutoSplitter extends Plugin {
 					fight_timer = tick_count;
 					dirty = false;
 				} else {
-					send_split();
 					phase++;
 				}
 				// reset phase and subphase timers
@@ -161,12 +141,10 @@ public class NMAutoSplitter extends Plugin {
 			case PHOSANI_P2_PILLARS:
 			case PHOSANI_P3_PILLARS:
 			case PHOSANI_P4_PILLARS:
-				send_split();
 				subph_timer = tick_count;
 				break;
 		}
 	}
-
 
 	private int get_noa_npc_type(NPC npc) {
 		if (npc == null) return -1;
@@ -201,10 +179,6 @@ public class NMAutoSplitter extends Plugin {
 	}
 
 
-	private String to_mmss(int ticks) {
-		return client.getVarbitValue(11866) == 1 ? MiscUtil.to_mmss_precise(ticks)
-				: MiscUtil.to_mmss(ticks);
-	}
 
 	private boolean is_in_noa() {
 		WorldPoint wp = client.getLocalPlayer().getWorldLocation();

@@ -13,8 +13,4 @@ public interface NMAutoSplitterConfig extends Config {
 		return 16834;
 	}
 
-	@ConfigItem(position = 1, keyName = "regular", name = "Split only on floors", description = "Split only on floor changes, useful for regular cox.")
-	default boolean regular() {
-		return false;
-	}
 }
