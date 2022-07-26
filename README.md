@@ -37,4 +37,4 @@ If your status is green you are good to go.
 
 
 ## Templates
-Layout and splits templates for LiveSplit can be found in [LiveSplit templates]
+Layout and splits templates for LiveSplit can be found in [LiveSplit templates](https://github.com/framboid/nm-autosplitter/tree/master/LiveSplit%20Templates)
