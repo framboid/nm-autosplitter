@@ -23,6 +23,7 @@ Start LiveSplit and start the LiveSplit server (right click LS -> control -> sta
 Make sure to add the LS server to your layout, otherwise you won't see "start server" under control.
 
 ![lsserver](https://user-images.githubusercontent.com/109918307/181097112-0a92fdf9-4f81-4bed-a5f6-56bcd70a5639.png)
+![layout](![image](https://user-images.githubusercontent.com/109918307/181098228-e19dc982-9a73-4fbc-bcd2-9cd81697b83d.png)
 
 
 Open the sidebar and click "Connect".
