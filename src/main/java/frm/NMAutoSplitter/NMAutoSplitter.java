@@ -79,7 +79,8 @@ public class NMAutoSplitter extends Plugin {
 	NMAutoSplitterConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(NMAutoSplitterConfig.class);
 	}
-
+//TODO sidebar controller dissapears if sky's cox autosplitter or nmas is turned off
+// want to keep controller in sidebar unless both are turned off
 	@Override
 	protected void shutDown() throws Exception {
 		clientToolbar.removeNavigation(navButton);
@@ -185,7 +186,7 @@ public class NMAutoSplitter extends Plugin {
 		int template = client.getInstanceTemplateChunks()[client.getPlane()][x / 8][y / 8];
 		return (template & NM_ROOM_MASK) == NM_ROOM;
 	}
-
+//TODO autoreset function, when you click the pool or wake her up again it resets your splits
 	private void send_split() {
 		try {
 			writer.write("startorsplit\r\n");
