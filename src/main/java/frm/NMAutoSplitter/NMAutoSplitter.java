@@ -197,7 +197,7 @@ public class NMAutoSplitter extends Plugin {
 	protected void startUp() {
 		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "/icon.png");
 		panel = new NMAutoSplitterPanel(client, writer, config, this);
-		navButton = NavigationButton.builder().tooltip("LiveSplit controller")
+		navButton = NavigationButton.builder().tooltip("PNM controller")
 				.icon(icon).priority(6).panel(panel).build();
 		clientToolbar.addNavigation(navButton);
 

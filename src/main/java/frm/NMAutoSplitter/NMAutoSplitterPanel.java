@@ -108,7 +108,7 @@ public class NMAutoSplitterPanel extends PluginPanel
 
         JPanel controllerFrame = new JPanel();
         controllerFrame.setLayout(new GridLayout(6, 1));
-        controllerFrame.setBorder(BorderFactory.createTitledBorder(new LineBorder(Color.CYAN), "LiveSplit Controller"));
+        controllerFrame.setBorder(BorderFactory.createTitledBorder(new LineBorder(Color.CYAN), "PNM Controller"));
 
         JButton[] controllerButtons = {new JButton("Split"), new JButton("Reset"), new JButton("Undo split"),
                 new JButton("Skip split"), new JButton("Pause"), new JButton("Resume")};
