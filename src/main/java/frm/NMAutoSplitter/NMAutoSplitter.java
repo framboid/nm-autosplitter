@@ -6,6 +6,7 @@ import static net.runelite.api.ChatMessageType.GAMEMESSAGE;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import com.google.inject.Provides;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.NPC;
 import net.runelite.api.NpcID;
@@ -19,7 +20,8 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.util.ImageUtil;
-
+import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.io.PrintWriter;
@@ -79,8 +81,7 @@ public class NMAutoSplitter extends Plugin {
 	NMAutoSplitterConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(NMAutoSplitterConfig.class);
 	}
-//TODO sidebar controller dissapears if sky's cox autosplitter or nmas is turned off
-// want to keep controller in sidebar unless both are turned off
+
 	@Override
 	protected void shutDown() throws Exception {
 		clientToolbar.removeNavigation(navButton);
@@ -177,7 +178,14 @@ public class NMAutoSplitter extends Plugin {
 		return -1;
 	}
 
-
+	@ Subscribe
+	public void onChatMessage(ChatMessage e) {
+		String mes = e.getMessage();
+		if (e.getType() == ChatMessageType.GAMEMESSAGE && mes.equals(
+				"The Nightmare will awaken in 10 seconds!")) {
+			auto_reset();
+		}
+	}
 
 	private boolean is_in_noa() {
 		WorldPoint wp = client.getLocalPlayer().getWorldLocation();
@@ -186,10 +194,16 @@ public class NMAutoSplitter extends Plugin {
 		int template = client.getInstanceTemplateChunks()[client.getPlane()][x / 8][y / 8];
 		return (template & NM_ROOM_MASK) == NM_ROOM;
 	}
-//TODO autoreset function, when you click the pool or wake her up again it resets your splits
 	private void send_split() {
 		try {
 			writer.write("startorsplit\r\n");
+			writer.flush();
+		} catch (Exception ignored) { }
+	}
+
+	private void auto_reset() {
+		try{
+			writer.write("reset\r\n");
 			writer.flush();
 		} catch (Exception ignored) { }
 	}
